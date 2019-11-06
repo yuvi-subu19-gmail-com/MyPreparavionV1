@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+
+<suite name="MyPreparation">
+
+<listeners>
+<listener class-name="com.automation.mypreparation.utiities.Reporting"/>
+</listeners>
+	<test name="LoginTest">
+		<parameter name="Browser" value="chrome"/>
+		<classes>
+		 	<class name="com.automation.mypreparation.tests.Tc_Login" />
+			<class name="com.automation.mypreparation.tests.Tc_OrderHistoryDetails_NoRecords" />
+		</classes>
+	</test>
+</suite>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [MyPreparation]">
+  <listeners>
+    <listener class-name="com.automation.mypreparation.utiities.Reporting"/>
+  </listeners>
+  <test thread-count="5" name="LoginTest(failed)">
+    <parameter name="Browser" value="chrome"/>
+    <classes>
+      <class name="com.automation.mypreparation.tests.Tc_Login">
+        <methods>
+          <include name="tearDown"/>
+          <include name="loginTest" invocation-numbers="1"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.automation.mypreparation.tests.Tc_Login -->
+    </classes>
+  </test> <!-- LoginTest(failed) -->
+</suite> <!-- Failed suite [MyPreparation] -->
