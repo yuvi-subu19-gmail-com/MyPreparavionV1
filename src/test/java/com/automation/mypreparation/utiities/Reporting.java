@@ -34,17 +34,18 @@ public class Reporting extends TestListenerAdapter {
 		String DateTimeStamp=sdf.format(new Date());
 		reporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "//test-output//MyPreparationV1Report"+DateTimeStamp+".html");
 		reporter.loadXMLConfig(System.getProperty("user.dir")+"//extent-config.xml");
+
+		reporter.config().setReportName("Automation Test Report for MyPreparation App");
+		reporter.config().setDocumentTitle("Automation Report");
+		reporter.config().enableTimeline(true);
+		reporter.config().setTheme(Theme.DARK);
+
 		extent = new ExtentReports();
 		extent.attachReporter(reporter);
 		extent.setSystemInfo("Host Name", "Local Host");
 		extent.setSystemInfo("Env", "QA");
 		extent.setSystemInfo("user", "Yuvaraj");
 		
-		reporter.config().setReportName("Automation Test Report for MyPreparation App");
-		reporter.config().setDocumentTitle("Automation Report");
-		reporter.config().enableTimeline(true);
-		reporter.config().setTheme(Theme.DARK);
-
 	}
 	public void onTestSuccess(ITestResult tr) {
 
