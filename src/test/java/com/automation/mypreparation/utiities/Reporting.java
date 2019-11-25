@@ -30,10 +30,11 @@ public class Reporting extends TestListenerAdapter {
 	WebDriver idriver;
 
 	public void onStart(ITestContext testContext) {
-		SimpleDateFormat sdf=new SimpleDateFormat("ddMMyy_hhmmss");
-		String DateTimeStamp=sdf.format(new Date());
-		reporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "//test-output//MyPreparationV1Report"+DateTimeStamp+".html");
-		reporter.loadXMLConfig(System.getProperty("user.dir")+"//extent-config.xml");
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy_hhmmss");
+		String DateTimeStamp = sdf.format(new Date());
+		reporter = new ExtentHtmlReporter(
+				System.getProperty("user.dir") + "//test-output//MyPreparationV1Report" + DateTimeStamp + ".html");
+		reporter.loadXMLConfig(System.getProperty("user.dir") + "//extent-config.xml");
 
 		reporter.config().setReportName("Automation Test Report for MyPreparation App");
 		reporter.config().setDocumentTitle("Automation Report");
@@ -45,8 +46,9 @@ public class Reporting extends TestListenerAdapter {
 		extent.setSystemInfo("Host Name", "Local Host");
 		extent.setSystemInfo("Env", "QA");
 		extent.setSystemInfo("user", "Yuvaraj");
-		
+
 	}
+
 	public void onTestSuccess(ITestResult tr) {
 
 		test = extent.createTest(tr.getName());
@@ -59,27 +61,25 @@ public class Reporting extends TestListenerAdapter {
 		test = extent.createTest(tr.getName());
 		test.log(Status.FAIL, MarkupHelper.createLabel(tr.getName(), ExtentColor.RED));
 		test.log(Status.ERROR, tr.getThrowable());
-		String methodName=tr.getName();
+		String methodName = tr.getName();
 		ITestContext context = tr.getTestContext();
 		idriver = (WebDriver) context.getAttribute("webDriver");
-		String path=takeScreenshot(methodName,idriver);
+		String path = takeScreenshot(methodName, idriver);
 		try {
-			test.fail("Screenshot is shown below"+ test.addScreenCaptureFromPath(path));
+			test.fail("Screenshot is shown below                 " + test.addScreenCaptureFromPath(path));
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
-		
 
 	}
 
-	public String takeScreenshot(String method,WebDriver rdriver) {
+	public String takeScreenshot(String method, WebDriver rdriver) {
 
 		String screenshotPath = System.getProperty("user.dir") + "//Screenshots//" + method + ".png";
 
 		File dest = new File(screenshotPath);
 
-		
 		File src = ((TakesScreenshot) rdriver).getScreenshotAs(OutputType.FILE);
 		try {
 			FileUtils.copyFile(src, dest);
